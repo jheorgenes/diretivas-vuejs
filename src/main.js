@@ -46,28 +46,61 @@ Vue.directive('posicao', {
 
 Vue.directive('informacao', {
   created(el, binding) {
+    console.log(el, binding.arg, binding.modifiers, binding.value);
 
-    let funcao = function () {
+    let funcao = null;
 
-      //Criando o elemento de Span
-      let informacaoSpan = document.createElement('span');
-      informacaoSpan.style.position = 'absolute';
-      informacaoSpan.style.background = '#ddd';
-      informacaoSpan.style.padding = '2px';
-      informacaoSpan.innerText =  binding.value;
+    if(binding.arg == undefined || binding.arg === 'simples'){
+      funcao = function () {
 
-      el.appendChild(informacaoSpan); //Adicionando ao Span PAI
+        let informacaoSpan = document.createElement('span');
+        informacaoSpan.style.position = 'absolute';
+        informacaoSpan.style.background = '#ddd';
+        informacaoSpan.style.padding = '2px';
+        informacaoSpan.innerText =  binding.value;
 
-      //Adicionando no elmento um evento de escuta de click (se clicado, executará a função abaixo)
-      informacaoSpan.addEventListener('click', (event) => {
-        event.stopPropagation(); //Eventando que o evento de clique do elemento pai se extenda para o elemento filho
-        informacaoSpan.remove(); //Remove o elemento html
-      })
+        el.appendChild(informacaoSpan);
+
+        informacaoSpan.addEventListener('click', (event) => {
+          event.stopPropagation(); 
+          informacaoSpan.remove(); 
+        })
+      }
     }
 
+    if(binding.arg === 'destacado') {
+      funcao = function () {
+        let informacaoDivContainer = document.createElement('div');
+        let informacaoDiv = document.createElement('div');
+        informacaoDiv.innerText = binding.value;
+  
+        informacaoDivContainer.style.width = '100%';
+        informacaoDivContainer.style.height = '100%';
+        informacaoDivContainer.style.display = 'flex';
+        informacaoDivContainer.style.flexDirection = 'row';
+        informacaoDivContainer.style.alignItems = 'center';
+        informacaoDivContainer.style.justifyContent = 'center';
+        informacaoDivContainer.style.background = '#ccc';
+        informacaoDivContainer.style.position = 'absolute';
+        informacaoDivContainer.style.top = '0';
+        informacaoDivContainer.style.zIndex = '10';
+  
+        informacaoDiv.style.padding = '30px';
+        informacaoDiv.style.background = '#fba';
+  
+        informacaoDivContainer.appendChild(informacaoDiv);
+  
+        el.appendChild(informacaoDivContainer);
+
+        informacaoDivContainer.addEventListener('click', (event) => {
+          event.stopPropagation(); 
+          informacaoDivContainer.remove(); 
+        })
+      }
+    }
 
     if(binding.modifiers['umClickMouse']) {
-      el.addEventListener('click', funcao) //Adicionando um evento de click e executando a função criada
+      el.addEventListener('click', funcao) 
     }
 
     if(binding.modifiers['doisClicksMouse']) {

@@ -4,7 +4,7 @@
   <p v-texto="configuracaoTexto">Teste</p>
   <div v-posicao:absolute="75" v-texto="{ cor: 'green', totalCaracteres: 100 }">Olá, eu sou um binding de argumento e valor</div>
   <span>Código A: </span><input type="text"><span v-informacao:simples.umClickMouse="'Você encontrará o código A na parte frontal do equipamento'"> i </span>
-  <span>Código B: </span><input type="text"><span v-informacao:simples.doisClicksMouse="'Você encontrará o código B na parte traseira do equipamento, abaixo da tampa de proteção.'"> i </span>
+  <span>Código B: </span><input type="text"><span v-informacao:destacado.doisClicksMouse="'Você encontrará o código B na parte traseira do equipamento, abaixo da tampa de proteção.'"> i </span>
 </template>
 
 <script>
