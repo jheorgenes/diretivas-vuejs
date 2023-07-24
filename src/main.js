@@ -46,26 +46,32 @@ Vue.directive('posicao', {
 
 Vue.directive('informacao', {
   created(el, binding) {
-    console.log(el, binding.arg, binding.modifiers, binding.value);
 
     let funcao = function () {
 
+      //Criando o elemento de Span
       let informacaoSpan = document.createElement('span');
       informacaoSpan.style.position = 'absolute';
       informacaoSpan.style.background = '#ddd';
       informacaoSpan.style.padding = '2px';
       informacaoSpan.innerText =  binding.value;
 
-      el.appendChild(informacaoSpan);
+      el.appendChild(informacaoSpan); //Adicionando ao Span PAI
 
-      informacaoSpan.addEventListener('click', () => {
-        informacaoSpan.remove();
+      //Adicionando no elmento um evento de escuta de click (se clicado, executará a função abaixo)
+      informacaoSpan.addEventListener('click', (event) => {
+        event.stopPropagation(); //Eventando que o evento de clique do elemento pai se extenda para o elemento filho
+        informacaoSpan.remove(); //Remove o elemento html
       })
     }
 
-    // Só será executada se houver um evento de click
-    if(binding.modifiers['umclickMouse']) {
-      el.addEventListener('click', funcao)
+
+    if(binding.modifiers['umClickMouse']) {
+      el.addEventListener('click', funcao) //Adicionando um evento de click e executando a função criada
+    }
+
+    if(binding.modifiers['doisClicksMouse']) {
+      el.addEventListener('dblclick', funcao)
     }
 
   }
