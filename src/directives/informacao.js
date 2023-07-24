@@ -1,6 +1,6 @@
 export default {
   created(el, binding) {
-    console.log(el, binding.arg, binding.modifiers, binding.value);
+    // console.log(el, binding.arg, binding.modifiers, binding.value);
 
     let funcao = null;
 

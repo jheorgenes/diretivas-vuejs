@@ -6,12 +6,17 @@
   <span>Código A: </span><input type="text"><span v-informacao:simples.umClickMouse.sairAutomaticamente="'Você encontrará o código A na parte frontal do equipamento'"> i </span>
   <br>
   <span>Código B: </span><input type="text"><span v-informacao:destacado.doisClicksMouse.sairAutomaticamente="'Você encontrará o código B na parte traseira do equipamento, abaixo da tampa de proteção.'"> i </span>
+  <hr>
+  <h1 v-colorir-fundo-texto="'green'">Diretiva Customizada registrada localmente (no componente)</h1>
 </template>
 
 <script>
-
+import colorirFundoTexto from '@/directives/colorirFundoTexto';
 export default {
   name: 'App',
+  directives: {
+    colorirFundoTexto: colorirFundoTexto
+  },
   data: () => ({
     configuracaoTexto: { cor: 'blue', tamanhoFonte: '300%', totalCaracteres: 4 }
   })
